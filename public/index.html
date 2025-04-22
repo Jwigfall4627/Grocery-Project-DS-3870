@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grocery Store</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <style>
+    .card {
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-img-top {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 1.25rem;
+    }
+
+    .card-title {
+      color: #2c3e50;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card-text {
+      color: #198754;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 0.75rem;
+      font-weight: 500;
+    }
+
+    .hero-section {
+      background-image: url('https://images.unsplash.com/photo-1586201375761-83865001e17b?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero-content {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 3rem;
+      border-radius: 1rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .btn-shop {
+      margin-top: 1rem;
+      padding: 1rem 2rem;
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Grocery Store</a>
+      <button class="btn btn-outline-light" id="cart-btn">
+        Cart <span class="badge bg-danger" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="display-4 fw-bold">Shop Now, Buy Later</h1>
+      <p class="lead">Get fresh groceries delivered now and pay when it's convenient. Simple, safe, and flexible.</p>
+      <button class="btn btn-success btn-lg btn-shop" onclick="scrollToItems()">Start Shopping</button>
+    </div>
+  </section>
+
+  <!-- Product Cards -->
+  <div class="container py-5">
+    <h2 class="text-center mb-4">Our Products</h2>
+    <div class="row g-4" id="items">
+
+      <!-- Product Cards -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=500&q=80" class="card-img-top" alt="Fresh Produce">
+          <div class="card-body">
+            <h5 class="card-title">Fresh Bananas</h5>
+            <p class="card-text">$0.99/lb</p>
+            <button class="btn btn-primary" onclick="addToCart('bananas')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repeat other cards similarly... -->
+      <!-- Milk -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=500&q=80" class="card-img-top" alt="Dairy">
+          <div class="card-body">
+            <h5 class="card-title">Whole Milk (1 Gallon)</h5>
+            <p class="card-text">$3.99</p>
+            <button class="btn btn-primary" onclick="addToCart('milk')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bread -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=500&q=80" class="card-img-top" alt="Bakery">
+          <div class="card-body">
+            <h5 class="card-title">Fresh Bread</h5>
+            <p class="card-text">$2.49</p>
+            <button class="btn btn-primary" onclick="addToCart('bread')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Eggs -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=500&q=80" class="card-img-top" alt="Eggs">
+          <div class="card-body">
+            <h5 class="card-title">Organic Eggs (12-pack)</h5>
+            <p class="card-text">$4.99</p>
+            <button class="btn btn-primary" onclick="addToCart('eggs')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apples -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=500&q=80" class="card-img-top" alt="Apples">
+          <div class="card-body">
+            <h5 class="card-title">Red Apples (1lb)</h5>
+            <p class="card-text">$1.99</p>
+            <button class="btn btn-primary" onclick="addToCart('apples')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chicken -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1604503468506-a8da13d3f0cc?w=500&q=80" class="card-img-top" alt="Chicken">
+          <div class="card-body">
+            <h5 class="card-title">Chicken Breast (1lb)</h5>
+            <p class="card-text">$5.99</p>
+            <button class="btn btn-primary" onclick="addToCart('chicken')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Eggs, Apples, Chicken -->
+      <!-- (Your other product cards remain unchanged, just keep formatting consistent) -->
+
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div class="modal fade" id="cartModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Shopping Cart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="cart-items"></div>
+        <div class="modal-footer">
+          <h5>Total: $<span id="cart-total">0.00</span></h5>
+          <button type="button" class="btn btn-primary" id="checkout-btn">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function scrollToItems() {
+      const itemsSection = document.getElementById('items');
+      itemsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Placeholder image map (optional if needed for dynamic image loading)
+    const imagePlaceholders = {
+      'bananas': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=500&q=80',
+      'milk': 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=500&q=80',
+      'bread': 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=500&q=80',
+      'eggs': 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=500&q=80',
+      'apples': 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=500&q=80',
+      'chicken': 'https://images.unsplash.com/photo-1604503468506-a8da13d3f0cc?w=500&q=80',
+      'ground-beef': 'https://images.unsplash.com/photo-1602470520998-f4a52199a3d6?w=500&q=80',
+      'cheese': 'https://images.unsplash.com/photo-1552641156-93ea2a5f78e2?w=500&q=80',
+      'tomatoes': 'https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?w=500&q=80',
+      'chips': 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=500&q=80',
+      'orange-juice': 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=500&q=80',
+      'carrots': 'https://images.unsplash.com/photo-1522184216316-3c1a2f3d5921?w=500&q=80'
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+    "name": "grocery-store",
+    "version": "1.0.0",
+    "description": "A grocery store website backend using Node.js, Express, and SQLite3",
+    "main": "start.js",
+    "scripts": {
+        "start": "node start.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.21.2",
+        "sqlite3": "^5.1.7"
+    },
+    "author": "",
+    "license": "ISC"
+}
